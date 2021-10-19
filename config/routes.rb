@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  namespace :api do
+    namespace :v1 do
+      post 'user_token' => 'user_token#create'
+
+      resources :orders, only: [:create, :index] do
+        member do
+          patch :change_status
+        end
+      end
+    end
+  end
 end
