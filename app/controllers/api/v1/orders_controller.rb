@@ -1,6 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
   before_action :order_params, only: [:create]
-  #before_action :authenticate_user
 
   def index
     @user_orders = Order.where(user_id: params[:user_id])
