@@ -41,5 +41,9 @@ RSpec.describe 'Orders', type: :request do
     it 'Expected the order status to be changed' do
       expect(JSON.parse(response.body)['status']).to eq('accepted')
     end
+
+    it 'Return 200 response' do
+      expect(response).to have_http_status(:success)
+    end
   end
 end
