@@ -1,9 +1,20 @@
 class Product < ApplicationRecord
+  validates :product_name, presence: true
+  validates :price, :quantity, presence: true, numericality: true
 
   def self.import(file)
-    CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
-      Product.assign_from_row(row)
+    counter = 0
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
+      product = Product.assign_from_row(row)
+
+      if product.save
+        counter += 1
+      else
+        puts "#{product.product_name} - #{product.errors.full_messages.join(',')}"
+      end
     end
+
+    puts "Imported #{counter} product"
   end
 
   def self.assign_from_row(row)
