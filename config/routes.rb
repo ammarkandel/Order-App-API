@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      post 'user_token' => 'user_token#create'
+      post '/signin', to: 'user_token#create'
+      post '/signup', to: 'users#create'
+
+      resources :users, only: [:show] do
+        resources :orders
+      end
 
       resources :products, only: [:import] do
         collection do
@@ -10,7 +15,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :orders, only: [:create, :index] do
+      resources :orders, only: [:create] do
         member do
           patch :change_status
         end

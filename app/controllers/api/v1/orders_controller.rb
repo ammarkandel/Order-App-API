@@ -3,9 +3,9 @@ class Api::V1::OrdersController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @orders = Order.all
+    @user_orders = User.find_by(id: params[:user_id])
 
-    render json: @orders
+    render json: @user_orders.orders
   end
 
   def create
