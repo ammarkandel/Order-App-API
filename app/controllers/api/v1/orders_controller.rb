@@ -1,6 +1,6 @@
 class Api::V1::OrdersController < ApplicationController
-  before_action :set_order, only: [:create, :change_status]
-  before_action :authenticate_user
+  before_action :order_params, only: [:create]
+  #before_action :authenticate_user
 
   def index
     @user_orders = Order.where(user_id: params[:user_id])
@@ -19,11 +19,14 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def change_status
-    @order = Order.find_by(id: params[:id])
-
+    @get_order = Order.find_by(id: params[:id])
     return unless params[:status].present? && Order::STATUS.include?(params[:status].to_sym)
 
-    @order.update(status: params[:status])
+    if @get_order.update(status: params[:status])
+      render json: @get_order, status: :created
+    else
+      render json: @get_order.errors, status: :unprocessable_entity
+    end
   end
 
   private
