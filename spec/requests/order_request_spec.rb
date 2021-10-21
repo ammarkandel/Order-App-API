@@ -17,7 +17,7 @@ RSpec.describe 'Orders', type: :request do
 
   describe 'POST create new order' do
     before do
-      post '/api/v1/orders.json', params: { order: { total_price: 2500, user_id: 1 } }
+      post "/api/v1/users/#{user_id}/orders.json", params: { order: { total_price: 2500 } }
     end
 
     it 'Expected to submit the total_price' do
@@ -25,7 +25,7 @@ RSpec.describe 'Orders', type: :request do
     end
 
     it 'Expected to submit the user_id' do
-      expect(JSON.parse(response.body)['user_id']).to eq(1)
+      expect(JSON.parse(response.body)['user_id']).to eq(user_id)
     end
   end
 
