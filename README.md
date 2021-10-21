@@ -12,7 +12,9 @@
 
 - Every user will signup or login.
 
-- Change status for orders to be ( accepted or rejected).
+- Change status for orders to be ( accepted or rejected ).
+
+- Manage CSV change to database in products table.
 
 
 ## How to run this project:
