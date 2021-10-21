@@ -17,11 +17,19 @@ RSpec.describe 'Orders', type: :request do
 
   describe 'POST create new order' do
     before do
-      post "/api/v1/users/#{user_id}/orders.json", params: { order: { total_price: 2500 } }
+      def order_info
+        { total_price: 2500, order_detail_attributes: { quantity: 500 } }
+      end
+
+      post "/api/v1/users/#{user_id}/orders.json", params: { order: order_info }
     end
 
     it 'Expected to submit the total_price' do
       expect(JSON.parse(response.body)['total_price']).to eq(2500)
+    end
+
+    it 'Return 200 response if the request is success' do
+      expect(response).to have_http_status(:success)
     end
 
     it 'Expected to submit the user_id' do

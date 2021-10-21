@@ -5,12 +5,11 @@ class Api::V1::OrdersController < ApplicationController
   def index
     @user_orders = @user.orders
 
-    render json: @user_orders, include: ['order_details']
+    render json: @user_orders, include: ['order_detail']
   end
 
   def create
-     @order = Order.new(order_params)
-     @order.user_id = params[:user_id]
+     @order = @user.orders.new(order_params)
 
      if @order.save
        @order.users << @user
@@ -35,7 +34,7 @@ class Api::V1::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:total_price)
+    params.require(:order).permit(:total_price, order_detail_attributes: [:id, :quantity, :order_id])
   end
 
   def set_user

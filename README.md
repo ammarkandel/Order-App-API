@@ -8,7 +8,7 @@
 
 - Get orders for the user you want with the order details.
 
-- Every user could create new order.
+- Every user could create new order with the order detail.
 
 - Every user will signup or login.
 
@@ -51,4 +51,4 @@ The code includes unit testing using RSpec. To start the test run the next line 
 
 - GitHub: [ammarkandel](https://github.com/ammarkandel)
 - Twitter: [@AmmarQandel](https://twitter.com/AmmarQandel)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/ammar-kandel-7b4100193/)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/ammar-kandel/)
