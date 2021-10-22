@@ -1,6 +1,6 @@
 class Api::V1::OrdersController < ApplicationController
   before_action :order_params, only: [:create]
-  before_action :set_user
+  before_action :set_user, except: [:change_status]
 
   def index
     @user_orders = @user.orders

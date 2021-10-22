@@ -13,14 +13,13 @@ namespace :api do
       member do
         patch :change_status
       end
-     end
+    end
 
     resources :products, only: [:import] do
       collection do
         post :import
       end
     end
-
    end
   end
 end
