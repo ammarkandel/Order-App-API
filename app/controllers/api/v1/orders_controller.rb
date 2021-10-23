@@ -1,4 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
+  before_action :authenticate_user
   before_action :order_params, only: [:create]
   before_action :set_user, except: [:change_status]
 
@@ -38,6 +39,8 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def set_user
+    return @user if defined? @user
+
     @user = User.find_by(id: params[:user_id])
   end
 end

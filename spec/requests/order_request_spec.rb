@@ -5,10 +5,24 @@ RSpec.describe 'Orders', type: :request do
   let!(:users) { FactoryBot.create_list(:user, 5) }
   let!(:order_id) { orders.first.id }
   let!(:user_id) { users.first.id }
+  let!(:first_name) { users.first.first_name }
+  let!(:last_name) { users.first.last_name }
+
+  def user_payload
+    { sub: user_id, first_name: first_name, last_name: last_name }
+  end
+
+  def authenticated_header
+    token = Knock::AuthToken.new(payload: user_payload).token
+
+    { 'Authorization': "Bearer #{token}" }
+  end
 
   describe 'GET user orders' do
 
-    before { get "/api/v1/users/#{user_id}/orders.json" }
+    before do
+      get "/api/v1/users/#{user_id}/orders.json", headers: authenticated_header
+    end
 
     it 'Return 200 response' do
       expect(response).to have_http_status(:success)
@@ -21,7 +35,7 @@ RSpec.describe 'Orders', type: :request do
         { total_price: 2500, order_detail_attributes: { quantity: 500 } }
       end
 
-      post "/api/v1/users/#{user_id}/orders.json", params: { order: order_info }
+      post "/api/v1/users/#{user_id}/orders.json", params: { order: order_info }, headers: authenticated_header
     end
 
     it 'Expected to submit the total_price' do
@@ -39,7 +53,7 @@ RSpec.describe 'Orders', type: :request do
 
   describe 'PATCH Update order status' do
     before do
-      patch "/api/v1/orders/#{order_id}/change_status", params: { status: 'accepted' }
+      patch "/api/v1/orders/#{order_id}/change_status", params: { status: 'accepted' }, headers: authenticated_header
     end
 
     it 'Expected the order status to be changed' do
