@@ -4,7 +4,7 @@ class Api::V1::OrdersController < ApplicationController
   before_action :set_user, except: [:change_status]
 
   def index
-    @user_orders = @user.orders
+    @user_orders = @user.orders.includes(:order_detail)
 
     render json: @user_orders, include: ['order_detail']
   end
