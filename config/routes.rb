@@ -9,18 +9,9 @@ namespace :api do
       resources :orders, only: [:create, :index]
     end
 
-    resources :orders, only: [:change_status] do
-      member do
-        patch :change_status
-      end
-    end
-
-    # We could made this route for the admin user.
-    # resources :products, only: [:import] do
-    #  collection do
-    #    post :import
-    #  end
-    # end
+     resources :orders, only: [:change_status] do
+       patch :change_status, on: :member
+     end
    end
   end
 end
