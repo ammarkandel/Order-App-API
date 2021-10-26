@@ -47,6 +47,11 @@ The code includes unit testing using RSpec. To start the test run the next line 
 `bundle exec rspec`
 
 
+## Update the products table
+
+Add the file 'products.csv' to the folder of the app. And run `bundle exec rails import:products`.
+
+
 ## Author
 
 👤 **Ammar El refay Kandel**

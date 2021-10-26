@@ -15,11 +15,12 @@ namespace :api do
       end
     end
 
-    resources :products, only: [:import] do
-      collection do
-        post :import
-      end
-    end
+    # We could made this route for the admin user.
+    # resources :products, only: [:import] do
+    #  collection do
+    #    post :import
+    #  end
+    # end
    end
   end
 end
