@@ -1,6 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
   before_action :authenticate_user
-  before_action :order_params, only: [:create]
   before_action :set_user, except: [:change_status]
 
   def index
@@ -10,11 +9,12 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def create
+     order_params
      @order = @user.orders.new(order_params)
 
      if @order.save
        @order.users << @user
-       render json: @order, status: :created
+       render json: @order, include: ['order_detail'], status: :created
      else
        render json: @order.errors, status: :unprocessable_entity
      end

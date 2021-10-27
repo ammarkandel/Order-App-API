@@ -9,9 +9,9 @@ namespace :api do
       resources :orders, only: [:create, :index]
     end
 
-     resources :orders, only: [:change_status] do
-       patch :change_status, on: :member
-     end
+    resources :orders, only: [:change_status] do
+      patch :change_status, on: :member
+    end
    end
   end
 end
