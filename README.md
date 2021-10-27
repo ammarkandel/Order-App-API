@@ -37,7 +37,9 @@
 
 - Run `rails server`
 
-- Open `http:localhost:3000` on the browser
+- Open `http:localhost:3000` on the browser.
+
+- You can change the server and specify the frontend from the `app/config/initializers/cors.rb`.
 
 
 ## Test-driven development RSPEC
