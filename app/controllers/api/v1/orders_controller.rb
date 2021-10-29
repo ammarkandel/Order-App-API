@@ -22,7 +22,6 @@ class Api::V1::OrdersController < ApplicationController
 
   def change_status
     @get_order = Order.find_by(id: params[:id])
-
     return unless params[:status].present? && Order::STATUS.include?(params[:status].to_sym)
 
     if @get_order.update(status: params[:status])
