@@ -3,6 +3,6 @@ namespace :import do
   task products: :environment do
     filename = File.join Rails.root, "products.csv"
 
-    Product.import(filename)
+    Product::CreateProduct.new(filename).import_file
   end
 end
